@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 data class ColdSession(
     val id: Long,
     val durationSeconds : Int,
-    val waterTempC: Float?
+    val watterTempC: Float?
 )
 
 interface ColdSessionRepository {
