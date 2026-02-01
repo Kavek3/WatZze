@@ -28,6 +28,18 @@ class WeatherViewModel(
     val uiState: StateFlow<WeatherUiState> = _uiState
 
     /**
+     * Set error in ui state
+     * @param [message] error message
+     */
+    fun setError(message: String) {
+        _uiState.value = WeatherUiState(
+            isLoading = false,
+            data = null,
+            error = message
+        )
+    }
+
+    /**
      * load weather from rest api
      * @param [latitude] latitude for location
      * @param [longitude] longitude for location
