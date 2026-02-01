@@ -1,6 +1,5 @@
 package com.kavka.watzze.ui.screens
 
-import android.widget.Space
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -24,13 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.room.util.TableInfo
 import com.kavka.watzze.R
 import kotlinx.coroutines.delay
-import java.nio.file.WatchEvent
 
 /**
  * Splash screen

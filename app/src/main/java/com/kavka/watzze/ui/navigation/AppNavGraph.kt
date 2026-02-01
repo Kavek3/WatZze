@@ -16,6 +16,7 @@ import com.kavka.watzze.ui.screens.ListScreen
 import com.kavka.watzze.ui.screens.WeatherScreen
 import com.kavka.watzze.viewmodel.AddEditViewModel
 import com.kavka.watzze.viewmodel.SessionsListViewModel
+import com.kavka.watzze.viewmodel.WeatherViewModel
 
 /**
  * Main navigation graph for the application.
@@ -24,6 +25,7 @@ import com.kavka.watzze.viewmodel.SessionsListViewModel
  * @param homeViewModel ViewModel for the Home screen.
  * @param listViewModel ViewModel for the list of sessions.
  * @param addEditViewModel ViewModel for adding or editing a session.
+ * @param weatherViewModel ViewModel for weather
  * @param modifier Optional modifier for customizing NavHost layout.
  */
 @Composable
@@ -31,6 +33,7 @@ fun AppNavGraph(
     homeViewModel: HomeViewModel,
     listViewModel: SessionsListViewModel,
     addEditViewModel: AddEditViewModel,
+    weatherViewModel: WeatherViewModel,
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController();
@@ -95,6 +98,7 @@ fun AppNavGraph(
         // --- Weather screen ---
         composable(Routes.WEATHER) {
             WeatherScreen(
+                vm = weatherViewModel,
                 onBack = { navController.popBackStack() }
             )
         }
