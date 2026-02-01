@@ -18,6 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/**
+ * Base screen layout with header, where can be back arrow
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BaseScreen(

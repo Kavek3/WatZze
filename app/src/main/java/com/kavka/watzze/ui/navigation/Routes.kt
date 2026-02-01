@@ -1,5 +1,8 @@
 package com.kavka.watzze.ui.navigation
 
+/**
+ * Defines all navigation routes used in the application.
+ */
 object Routes {
     const val SPLASH = "splash"
     const val HOME = "home"

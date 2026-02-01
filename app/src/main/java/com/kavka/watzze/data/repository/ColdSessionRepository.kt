@@ -1,13 +1,18 @@
 package com.kavka.watzze.data.repository
 
+import com.kavka.watzze.data.model.ColdSession
 import kotlinx.coroutines.flow.Flow
 
-data class ColdSession(
-    val id: Long,
-    val durationSeconds : Int,
-    val watterTempC: Float?
-)
-
+/**
+ * Repository interface for managing cold exposure sessions
+ */
 interface ColdSessionRepository {
-    fun observeSession(): Flow<List<ColdSession>>
+
+    fun observeSessions(): Flow<List<ColdSession>>
+
+    fun observeSession(id: Long): Flow<ColdSession?>
+
+    suspend fun upsert(session: ColdSession)
+
+    suspend fun delete(id: Long)
 }

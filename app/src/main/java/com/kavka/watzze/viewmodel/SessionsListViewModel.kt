@@ -2,36 +2,27 @@ package com.kavka.watzze.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kavka.watzze.data.model.ColdSession
 import com.kavka.watzze.data.repository.ColdSessionRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 /**
- * UI state for the Home screen.
+ * ViewModel for the screen that displays a list of all cold sessions.
  */
-data class HomeUiState(
-    val totalSession: Int = 0
-)
-
-/**
- * ViewModel for the Home screen.
- */
-class HomeViewModel (
+class SessionsListViewModel(
     repository: ColdSessionRepository
-) : ViewModel() {
+): ViewModel() {
 
     /**
-     * Uses repository.observeSessions() to automatically update the count
-     * whenever the database changes.
+     * Reactive list of all sessions stored in the app.
      */
-    val uiState: StateFlow<HomeUiState> =
+    val sessions: StateFlow<List<ColdSession>> =
         repository.observeSessions()
-            .map { HomeUiState(it.size) }
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5_000),
-                HomeUiState()
+                emptyList()
             )
 }

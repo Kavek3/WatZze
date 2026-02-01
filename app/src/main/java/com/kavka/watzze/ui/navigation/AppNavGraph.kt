@@ -14,10 +14,23 @@ import com.kavka.watzze.ui.screens.HomeScreen
 import com.kavka.watzze.ui.screens.SplashScreen
 import com.kavka.watzze.ui.screens.ListScreen
 import com.kavka.watzze.ui.screens.WeatherScreen
+import com.kavka.watzze.viewmodel.AddEditViewModel
+import com.kavka.watzze.viewmodel.SessionsListViewModel
 
+/**
+ * Main navigation graph for the application.
+ *
+ *
+ * @param homeViewModel ViewModel for the Home screen.
+ * @param listViewModel ViewModel for the list of sessions.
+ * @param addEditViewModel ViewModel for adding or editing a session.
+ * @param modifier Optional modifier for customizing NavHost layout.
+ */
 @Composable
 fun AppNavGraph(
     homeViewModel: HomeViewModel,
+    listViewModel: SessionsListViewModel,
+    addEditViewModel: AddEditViewModel,
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController();
@@ -27,6 +40,7 @@ fun AppNavGraph(
         startDestination = Routes.SPLASH,
         modifier = modifier
     ) {
+        // --- Splash screen ---
         composable(Routes.SPLASH) {
             SplashScreen(
                 onDone = {
@@ -37,6 +51,7 @@ fun AppNavGraph(
             )
         }
 
+        // --- Home screen ---
         composable(Routes.HOME) {
             HomeScreen(
                 vm = homeViewModel,
@@ -47,20 +62,25 @@ fun AppNavGraph(
             )
         }
 
+        // --- List screen ---
         composable(Routes.LIST) {
             ListScreen(
+                vm = listViewModel,
                 onBack = { navController.popBackStack() },
                 onOpenDetail = { navController.navigate(Routes.detail(id))},
                 onAdd = { navController.navigate(Routes.ADD_EDIT)}
             )
         }
 
+        // --- Add / Edit screen ---
         composable(Routes.ADD_EDIT) {
             AddEditScreen(
+                vm = addEditViewModel,
                 onBack = { navController.popBackStack() }
             )
         }
 
+        // --- Detail screen ---
         composable(
             route = Routes.DETAIL,
             arguments = listOf(navArgument("id") { type = NavType.LongType })
@@ -72,6 +92,7 @@ fun AppNavGraph(
             )
         }
 
+        // --- Weather screen ---
         composable(Routes.WEATHER) {
             WeatherScreen(
                 onBack = { navController.popBackStack() }
